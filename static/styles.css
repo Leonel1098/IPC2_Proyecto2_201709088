@@ -1,0 +1,161 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+main {
+    padding: 20px;
+    min-height: 80vh;  /* Asegura que el pie de página esté al final de la página */
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.simulation-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #e6f2ff;
+    border-radius: 10px;
+}
+
+.header {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.header nav ul {
+    list-style-type: none;
+    padding: 0;
+    display: inline-flex;
+}
+
+.header nav ul li {
+    margin: 0 15px;
+}
+
+.header nav ul li a {
+    text-decoration: none;
+    color: #333;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #b3d1ff;
+}
+
+.product-info h2 {
+    text-align: center;
+    background-color: #b3d1ff;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.componentes {
+    margin-top: 20px;
+}
+
+.componentes-lista {
+    display: flex;
+    justify-content: center;
+}
+
+.componente {
+    width: 50px;
+    height: 50px;
+    background-color: #0073e6;
+    margin: 0 10px;
+    border-radius: 5px;
+}
+
+.progress-bar {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.steps {
+    display: flex;
+    justify-content: center;
+}
+
+.steps button {
+    margin: 0 10px;
+    padding: 10px 20px;
+    border: none;
+    background-color: #b3d1ff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.table-container {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.table-container table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.table-container th, .table-container td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+.timer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.timer p {
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+.timer-icon {
+    width: 40px;
+    height: 40px;
+    background-color: #333;
+    border-radius: 50%;
+}

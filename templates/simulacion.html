@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}Simulación de Producto{% endblock %}
+
+{% block content %}
+<div class="simulation-container">
+    <div class="header">
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('upload_page') }}">Archivo</a></li>
+                <li><a href="#">Reportes</a></li>
+                <li><a href="#">Ayuda</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="product-info">
+        <h2>SmartWatch</h2>
+    </div>
+
+    <div class="componentes">
+        <h4>Componentes Necesarios</h4>
+        <div class="componentes-lista">
+            <div class="componente"></div>
+            <div class="componente"></div>
+            <div class="componente"></div>
+        </div>
+    </div>
+
+    <div class="progress-bar">
+        <h4>Process Bar</h4>
+        <div class="steps">
+            <button>Step 1</button>
+            <button>Step 2</button>
+            <button>Step 3</button>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <h4>Tabla</h4>
+        <table>
+            <thead>
+                <tr>
+                    <th>Tiempo</th>
+                    <th>Línea 1</th>
+                    <th>Línea 2</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1er seg</td>
+                    <td>Mover - C1</td>
+                    <td>MB-C1</td>
+                </tr>
+                <tr>
+                    <td>2do seg</td>
+                    <td>Mover C2</td>
+                    <td>No hacer nada</td>
+                </tr>
+                <!-- Más filas -->
+            </tbody>
+        </table>
+    </div>
+
+    <div class="timer">
+        <p>5 Seg</p>
+        <div class="timer-icon"></div>
+    </div>
+
+</div>
+{% endblock %}
