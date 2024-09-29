@@ -1,0 +1,37 @@
+<!-- templates/resultado.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado</title>
+</head>
+<body>
+    <h1>Listado de Máquinas</h1>
+
+    <!-- Formulario de carga de archivos -->
+    <form action="/cargar_archivo_xml" method="POST" enctype="multipart/form-data">
+        <input type="file" name="archivo" accept=".xml">
+        <button type="submit">Cargar</button>
+    </form>
+
+    <!-- Listado de máquinas -->
+    {% if maquinas %}
+        {% for maquina in maquinas %}
+            <h2>{{ maquina.nombre }}</h2>
+            <p> Líneas de Producción: {{ maquina.lineas_produccion }}</p>
+            <p> Componentes: {{ maquina.componentes }}</p>
+            <p> Tiempo de Ensamblaje: {{ maquina.tiempo_ensamblaje }}</p>
+
+            <h3>Productos:</h3>
+            <ul>
+                {% for producto in maquina.productos %}
+                    <li>{{ producto.nombre }} - Elaboración: {{ producto.elaboracion }}</li>
+                {% endfor %}
+            </ul>
+        {% endfor %}
+    {% else %}
+        <p>No se han cargado máquinas aún.</p>
+    {% endif %}
+</body>
+</html>
