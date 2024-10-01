@@ -1,34 +1,37 @@
 import xml.etree.ElementTree as ET
-from Lista_Enlazada import Lista_Enlazada
-from Maquina import Maquina
-from Producto import Producto
+from Lista_Enlazada import Lista_Enlazada  # Asegúrate de tener esta clase implementada
+from Maquina import Maquina  # Asegúrate de tener esta clase implementada
+from Producto import Producto  # Asegúrate de tener esta clase implementada
 
 class cargaXml:
-    def cargar_xml(ruta_archivo):
-        arbol = ET.parse(ruta_archivo)
-        raiz = arbol.getroot()
-        
-        lista_maquinas = Lista_Enlazada()
+    @staticmethod
+    def lectura_xml(archivo):
+        try:
+            arbol = ET.parse(archivo)
+            raiz = arbol.getroot()
+            lista_maquinas = Lista_Enlazada()
 
-        for maquina in raiz.findall('Maquina'):
-            nombre = maquina.find('NombreMaquina').text.strip()
-            lineas = int(maquina.find('CantidadLineasProduccion').text.strip())
-            componentes = int(maquina.find('CantidadComponentes').text.strip())
-            tiempo = int(maquina.find('TiempoEnsamblaje').text.strip())
-            
-            # Creamos la máquina
-            maquina_obj = Maquina(nombre, lineas, componentes, tiempo)
-            
-            # Cargar productos para esa máquina
-            for producto in maquina.find('ListadoProductos').findall('Producto'):
-                nombre_producto = producto.find('nombre').text.strip()
-                elaboracion = producto.find('elaboracion').text.strip()
+            for maquina in raiz.findall('Maquina'):
+                nombre = maquina.find('NombreMaquina').text.strip()
+                lineas = int(maquina.find('CantidadLineasProduccion').text.strip())
+                componentes = int(maquina.find('CantidadComponentes').text.strip())
+                tiempo = int(maquina.find('TiempoEnsamblaje').text.strip())
                 
-                # Crear el objeto Producto y añadirlo a la lista de productos de la máquina
-                producto_obj = Producto(nombre_producto, elaboracion)
-                maquina_obj.productos.agregar(producto_obj)
-            
-            # Agregar la máquina a la lista de máquinas
-            lista_maquinas.agregar(maquina_obj)
-        
-        return lista_maquinas
+                maquina_obj = Maquina(nombre, lineas, componentes, tiempo)
+                
+                for producto in maquina.find('ListadoProductos').findall('Producto'):
+                    nombre_producto = producto.find('nombre').text.strip()
+                    elaboracion = producto.find('elaboracion').text.strip()
+                    producto_obj = Producto(nombre_producto, elaboracion)
+                    maquina_obj.productos.agregar(producto_obj)
+                
+                lista_maquinas.agregar(maquina_obj)
+
+            # Devolver tanto la lista de máquinas como el contenido del XML
+            return lista_maquinas, ET.tostring(raiz, encoding='unicode')
+        except ET.ParseError:
+            print("Error al parsear el archivo XML.")
+            return None, None
+        except Exception as e:
+            print(f"Ocurrió un error: {e}")
+            return None, None

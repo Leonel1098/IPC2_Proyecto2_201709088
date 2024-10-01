@@ -1,6 +1,14 @@
-from flask import Flask, render_template, request
+from flask import Flask, redirect, render_template, request, url_for
 from Carga_XML import cargaXml
 app = Flask(__name__)
+import os
+
+upload_folder = './uploads/'
+if not os.path.exists(upload_folder):
+    os.makedirs(upload_folder)
+
+
+
 
 @app.route('/')
 def index():
@@ -9,24 +17,32 @@ def index():
 @app.route('/cargar_archivo_xml', methods=['POST'])
 def cargar_archivo_xml():
     if 'archivo' not in request.files:
-        return "No se ha seleccionado un archivo", 400
+        print("No se ha seleccionado un archivo.", "error")
+        return redirect(url_for('index'))
 
     archivo = request.files['archivo']
     if archivo.filename == '':
-        return "Nombre de archivo vacío", 400
-    
+        print("Nombre de archivo vacío.", "error")
+        return redirect(url_for('index'))
+
     if archivo and archivo.filename.endswith('.xml'):
-        # Guardar el archivo temporalmente
-        ruta_archivo = f'./uploads/{archivo.filename}'
+        ruta_archivo = os.path.join(upload_folder, archivo.filename)
         archivo.save(ruta_archivo)
 
-        # Cargar el XML con la función de nuestro archivo `cargar_xml.py`
-        maquinas = cargaXml.cargar_xml(ruta_archivo)
+        # Cargar el XML
+        maquinas, contenido_xml = cargaXml.lectura_xml(ruta_archivo)
+        
+        if maquinas is None:
+            print("Error al leer el archivo XML.", "error")
+            return redirect(url_for('index'))
 
-        # Aquí puedes procesar los datos y renderizar una plantilla, por ejemplo
-        return render_template('resultado.html', maquinas=maquinas)
+        print("Archivo cargado exitosamente.", "success")
+        return render_template('resultado.html', maquinas=maquinas, contenido_xml=contenido_xml)
     else:
-        return "Formato de archivo no permitido", 400
+        print("Formato de archivo no permitido.", "error")
+        return redirect(url_for('index'))
+
+
 
 @app.route('/simulate')
 def simulate():

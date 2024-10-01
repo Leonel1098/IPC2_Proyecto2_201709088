@@ -1,8 +1,11 @@
 {% extends "base.html" %}
 
-{% block title %}Inicio{% endblock %}
+{% block title %}Cargar Configuración{% endblock %}
 
 {% block content %}
-    <h1>Bienvenido a la Simulación de Ensamblaje</h1>
-    <p>Utiliza el menú de navegación para cargar la configuración, simular la construcción de productos, generar reportes, y más.</p>
+    <h1>Cargar archivo XML de configuración</h1>
+    <form action="/cargar_archivo_xml" method="POST" enctype="multipart/form-data">
+        <input type="file" name="archivo" accept=".xml" required>
+        <input type="submit" value="Subir">
+    </form>
 {% endblock %}

@@ -1,23 +1,21 @@
 from Nodo import Nodo
 
-
 class Lista_Enlazada:
-
     def __init__(self):
-        self.primero = None
-    
-    def agregar(self, data):
-        nuevo_nodo = Nodo(data)
-        if self.head is None:
-            self.head = nuevo_nodo
+        self.cabeza = None
+
+    def agregar(self, valor):
+        nuevo_nodo = Nodo(valor)
+        if not self.cabeza:
+            self.cabeza = nuevo_nodo
         else:
-            actual = self.head
-            while actual.next:
-                actual = actual.next
-            actual.next = nuevo_nodo
-    
-    def mostrar(self):
-        actual = self.head
+            actual = self.cabeza
+            while actual.siguiente:
+                actual = actual.siguiente
+            actual.siguiente = nuevo_nodo
+
+    def __iter__(self):
+        actual = self.cabeza
         while actual:
-            print(actual.data)
-            actual = actual.next
+            yield actual.valor
+            actual = actual.siguiente
